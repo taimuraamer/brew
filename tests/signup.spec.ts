@@ -46,5 +46,13 @@ test('shoud be able to Signup with Supplier', async (t) => {
     );
     await sign.clickSignup();
     await sign.verifySignup();
-})
+});
+
+test('shoud NOT be able to Signup with Distributor Name Empty', async (t) => {
+    await sign.maximizeWindow();
+    await sign.selectUserType('distributor');
+    await sign.fillHalfInfo(t.fixtureCtx.randomEmail, data.password, data.company);
+    await sign.verifySignupBtnDisabled();
+});
+
 });

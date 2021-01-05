@@ -27,7 +27,7 @@ export class Signup {
   //Dashboard
   signoutBtn: Selector = Selector(".sign-out");
   userAvatar: Selector = Selector(".user-block");
-
+  disabledSignupBtn: Selector = Selector(".apply-button.v-btn--disabled[disabled='disabled']");
   
   async selectUserType(user) {
     switch (user) {
@@ -52,6 +52,18 @@ export class Signup {
       .typeText(this.email, email)
       .typeText(this.password, password);
   }
+
+  async fillHalfInfo(email, password, company) {
+    await t
+      .typeText(this.company_supplier, company)
+      .typeText(this.email, email)
+      .typeText(this.password, password);
+  }
+  async verifySignupBtnDisabled() {
+    await t.expect(this.disabledSignupBtn.exists).ok({ timeout: 70000 });
+  }
+  
+
   async clickSignup() {
     await t.click(this.signupBtn);
   }
